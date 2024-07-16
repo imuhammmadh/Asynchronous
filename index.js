@@ -1,16 +1,16 @@
-//HTTP Requests & CallBack
 let getTodos = (callback) => {
     let request = new XMLHttpRequest()
 
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
-            callback(undefined, request.responseText);
+            let data = JSON.parse(request.responseText)
+            callback(undefined, data);
         } else if (request.readyState === 4) {
             callback("Could not fetch data", undefined)
         }
     })
 
-    request.open("GET", "https://jsonplaceholder.typicode.com/todos")
+    request.open("GET", "todos.json")
     request.send()
 }
 
